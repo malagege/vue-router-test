@@ -1,6 +1,8 @@
 <template>
     <div>
         User  {{ $route.params.id }}
+        <br>
+        <button v-on:click="test"> on test</button>
     </div>
 </template>
 
@@ -20,5 +22,13 @@ export default {
     // this.userData = await fetchUser(to.params.id)
     console.log('to',to,'from',from);
   },
+    methods:{
+        test(){
+            this.$router.push({
+            name: 'NotFound',
+            params: { pathMatch: this.$route.path.split('/') },
+            })
+        }
+    }
 }
 </script>

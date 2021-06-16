@@ -4,6 +4,8 @@ import App from './App.vue'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
 import User from './components/User.vue'
+import NotFound from './components/NotFound.vue'
+import UserGeneric from './components/UserGeneric.vue'
 
 
 // 2. 定義一些路由
@@ -14,6 +16,10 @@ const routes = [
     { path: '/about', component: About },
     // 動態段以冒號開始
     { path: '/users/:id', component: User },
+    // 將匹配所有內容並將其放在 `$route.params.pathMatch` 下
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+    // 將匹配以 `/user-` 開頭的所有內容，並將其放在 `$route.params.afterUser` 下
+    { path: '/user-:afterUser(.*)', component: UserGeneric },
   ]
   
 // 3. 創建路由實例並傳遞 `routes` 配置

@@ -3,6 +3,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
+import User from './components/User.vue'
+
 
 // 2. 定義一些路由
 // 每個路由都需要映射到一個組件。
@@ -10,6 +12,8 @@ import About from './components/About.vue'
 const routes = [
     { path: '/', component: Home },
     { path: '/about', component: About },
+    // 動態段以冒號開始
+    { path: '/users/:id', component: User },
   ]
   
 // 3. 創建路由實例並傳遞 `routes` 配置

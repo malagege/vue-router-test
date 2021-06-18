@@ -3,6 +3,7 @@
         User  {{ $route.params.id }}
         <br>
         <button v-on:click="test"> on test</button>
+        <router-view></router-view>
     </div>
 </template>
 

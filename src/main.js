@@ -6,6 +6,8 @@ import About from './components/About.vue'
 import User from './components/User.vue'
 import NotFound from './components/NotFound.vue'
 import UserGeneric from './components/UserGeneric.vue'
+import UserProfile from './components/UserProfile.vue'
+import UserPosts from './components/UserPosts.vue'
 
 
 // 2. 定義一些路由
@@ -15,7 +17,22 @@ const routes = [
     { path: '/', component: Home },
     { path: '/about', component: About },
     // 動態段以冒號開始
-    { path: '/users/:id', component: User },
+    { path: '/users/:id', component: User ,
+      children: [
+        {
+          // 當 /user/:id/profile 匹配成功 
+          // UserProfile 將被渲染到 User 的 <router-view> 內部
+          path: 'profile',
+          component: UserProfile,
+        },
+        {
+          // 當 /user/:id/posts 匹配成功
+          // UserPosts 將被渲染到 User 的 <router-view> 內部
+          path: 'posts',
+          component: UserPosts,
+        },
+      ],
+    },
     // 將匹配所有內容並將其放在 `$route.params.pathMatch` 下
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
     // 將匹配以 `/user-` 開頭的所有內容，並將其放在 `$route.params.afterUser` 下

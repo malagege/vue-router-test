@@ -8,6 +8,7 @@ import NotFound from './components/NotFound.vue'
 import UserGeneric from './components/UserGeneric.vue'
 import UserProfile from './components/UserProfile.vue'
 import UserPosts from './components/UserPosts.vue'
+import UserHome from './components/UserHome.vue'
 
 
 // 2. 定義一些路由
@@ -19,6 +20,11 @@ const routes = [
     // 動態段以冒號開始
     { path: '/users/:id', component: User ,
       children: [
+        // UserHome will be rendered inside User's <router-view>
+        // when /user/:id is matched
+        // 當 /user/:id 匹配成功
+        // UserHome 將被渲染到 User 的 <router-view> 內部
+        { path: '', component: UserHome },
         {
           // 當 /user/:id/profile 匹配成功 
           // UserProfile 將被渲染到 User 的 <router-view> 內部

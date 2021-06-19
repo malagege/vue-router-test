@@ -24,33 +24,28 @@ export default {
       error: null,
     }
   },
-  created() {
-    // watch 路由的參數，以便再次獲取數據
-    this.$watch(
-      () => this.$route.params,
-      () => {
-        this.fetchData()
-      },
-      // 組件創建完後獲取數據，
-      // 此時 data 已經被 observed 了
-      { immediate: true }
-    )
+  beforeRouteEnter(to, from, next) {
+    console.log('beforeRouteEnter')
+    getUser(to.params.id, (err, User) => {
+      next(vm => vm.setData(err, User))
+    })
+  },
+  // 路由改變前，組件就已經渲染完了
+  // 邏輯稍稍不同
+  async beforeRouteUpdate(to, from) {
+    console.log('beforeRouteUpdate')
+    getUser(to.params.id, (err, User) => {
+      this.setData(err,User)
+    })
   },
   methods: {
-    fetchData() {
-      this.error = this.User = null
-      this.loading = true
-      // replace `getUser` with your data fetching util / API wrapper
-      // 用你的數據獲取 util 或 API 替換 `getUser`
-      getUser(this.$route.params.id, (err, User) => {
-        this.loading = false
-        if (err) {
-          this.error = err.toString()
-        } else {
-          this.User = User
-        }
-      })
-    },
-  },
+    setData (err, User) {
+      if (err) {
+        this.error = err.toString()
+      } else {
+        this.User = User
+      }
+    }
+  }
 }
 </script>

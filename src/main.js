@@ -2,21 +2,23 @@ import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import Home from './components/Home.vue'
-import About from './components/About.vue'
+// import About from './components/About.vue'
 import User from './components/User.vue'
 import NotFound from './components/NotFound.vue'
 import UserGeneric from './components/UserGeneric.vue'
 import UserProfile from './components/UserProfile.vue'
 import UserPosts from './components/UserPosts.vue'
 import UserHome from './components/UserHome.vue'
+import People from './components/People.vue'
 
+const About = import('./components/About.vue')
 
 // 2. 定義一些路由
 // 每個路由都需要映射到一個組件。
 // 我們後面再討論嵌套路由。
 const routes = [
     { path: '/', component: Home },
-    { path: '/about', component: About },
+    { name:'about', path: '/about', component: About },
     // 動態段以冒號開始
     { path: '/users/:id', component: User ,
       children: [
@@ -37,6 +39,9 @@ const routes = [
           path: 'posts',
           component: UserPosts,
         },
+        {
+          name:'people', path:'/people/:id', component: People
+        }
       ],
     },
     // 將匹配所有內容並將其放在 `$route.params.pathMatch` 下

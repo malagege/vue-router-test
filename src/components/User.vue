@@ -16,6 +16,8 @@ export default {
         console.log('toParams',toParams,'previousParams',previousParams);
       }
     )
+
+    console.log('test1')
   },
 //   使用 beforeRouteUpdate 導航守衛，它也可以取消導航
   async beforeRouteUpdate(to, from) {
